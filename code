@@ -1,0 +1,61 @@
+package com.example.helloapps_0897
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.helloapps_0897.ui.theme.HelloApps_0897Theme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            HelloApps_0897Theme {
+                // Menggunakan Surface untuk mengisi seluruh layar
+                Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
+                    Scaffold { innerPadding ->
+                        CenteredGreeting(
+                            name = "World",
+                            modifier = Modifier.padding(innerPadding)
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CenteredGreeting(name: String, modifier: Modifier = Modifier) {
+    // Menggunakan Column untuk menempatkan teks di tengah
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = "Hello $name!",
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    HelloApps_0897Theme {
+        CenteredGreeting("Android")
+    }
+}
